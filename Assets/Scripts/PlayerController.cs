@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour {
     private int _sampleWindow = 128;
     private string _device;
 
+    public int micSensitivity;
     public static float MicLoudness;
 
     void Awake()
@@ -77,7 +78,7 @@ public class PlayerController : MonoBehaviour {
         MicLoudness = LevelMax() * 10000;
         Debug.Log(MicLoudness);
 
-        if (MicLoudness > 25) HandleJump();
+        if (MicLoudness > micSensitivity) HandleJump();
     }
 
     private bool IsGrounded()

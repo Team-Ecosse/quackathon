@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour {
     [Space]
     private static PlayerController _playerController;
     private Rigidbody2D _rigidbody2D;
+    private SpriteRenderer _spriterenderer;
+
 
     [Header("Scene Ground Attributes & Checker")]
     [Space]
@@ -55,6 +57,7 @@ public class PlayerController : MonoBehaviour {
     {
         _playerController = this;
         _rigidbody2D = GetComponent<Rigidbody2D>();
+        _spriterenderer = GetComponent<SpriteRenderer>();
 
         InitMic();
     }
@@ -196,6 +199,8 @@ public class PlayerController : MonoBehaviour {
     void FlipPlayer()
     {
         _isFlipped = !_isFlipped;
+
+        _spriterenderer.flipY = _isFlipped;
 
         _rigidbody2D.gravityScale *= -1;
     }

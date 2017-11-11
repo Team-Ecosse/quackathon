@@ -151,12 +151,12 @@ public class PlayerController : MonoBehaviour {
         {
             if (_rigidbody2D.velocity.y > 0)
             {
-                _rigidbody2D.velocity += Vector2.down * -Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+                _rigidbody2D.velocity += Vector2.down * -Physics2D.gravity.y * (fallMultiplier + 1) * Time.deltaTime;
 
             }
             else if (_rigidbody2D.velocity.y < 0)
             {
-                _rigidbody2D.velocity += Vector2.down * -Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
+                _rigidbody2D.velocity += Vector2.down * -Physics2D.gravity.y * (lowJumpMultiplier + 1) * Time.deltaTime;
             }
 
 

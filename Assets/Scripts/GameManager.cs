@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour {
     [Space]
 
     private GameObject _eventSystem;
+    public PlayerManager PlayerManager;
+    public ScoreManager ScoreManager;
 
     [Space]
     [Header("Scene Indexer")]
@@ -52,5 +54,35 @@ public class GameManager : MonoBehaviour {
 
     public void ExitGame() {
         Application.Quit();
+    }
+
+    public void PlayerTakeDamage(int damage)
+    {
+        PlayerManager.playerTakenDMG(damage);
+    }
+
+    public void PlayerHeal(int heal)
+    {
+        PlayerManager.playerGainHealth(heal);
+    }
+
+    public void ReturnPlayerHP()
+    {
+        PlayerManager.returnPlayerHealth();
+    }
+
+    public void PlayerLoseSco(int lose)
+    {
+        ScoreManager.playerLoseScore(lose);
+    }
+
+    public void PlayerAddSco(int add)
+    {
+        ScoreManager.playerAddScore(add);
+    }
+
+    public void ReturnPlayerSco()
+    {
+        ScoreManager.returnPlayerScore();
     }
 }

@@ -32,6 +32,9 @@ public class PlayerController : MonoBehaviour {
     [SerializeField]
     private bool _isGrounded;
 
+    [SerializeField]
+    private bool _isFlipped;
+
     [Space]
     [Header("Microphone States")]
     [Space]
@@ -41,6 +44,8 @@ public class PlayerController : MonoBehaviour {
     private string _device;
 
     public int micSensitivity;
+    public int micSensitivityUpper;
+
     public static float MicLoudness;
 
     void Awake()
@@ -78,7 +83,14 @@ public class PlayerController : MonoBehaviour {
         MicLoudness = LevelMax() * 10000;
         Debug.Log(MicLoudness);
 
-        if (MicLoudness > micSensitivity) HandleJump();
+        if (MicLoudness > micSensitivity && micSensitivityUpper > MicLoudness) HandleJump();
+
+        if (MicLoudness > micSensitivityUpper)
+        {
+            _isFlipped = !_isFlipped;
+        }
+
+        if (_isFlipped) Physics2D.gravity = -Physics2D.gravity;
     }
 
     private bool IsGrounded()
@@ -88,29 +100,66 @@ public class PlayerController : MonoBehaviour {
 
     private void HandleJump()
     {
-        if (!_isJumping && _isGrounded)
+        if (!_isFlipped)
         {
-            _isJumping = true;
-            _rigidbody2D.velocity = Vector2.up * jumpForce;
+            if (!_isJumping && _isGrounded)
+            {
+                _isJumping = true;
+                _rigidbody2D.velocity = Vector2.up * jumpForce;
 
+            }
+            else
+            {
+                _isJumping = false;
+            }
         }
+
         else
         {
-            _isJumping = false;
+            if (!_isJumping && _isGrounded)
+            {
+                _isJumping = true;
+                _rigidbody2D.velocity = Vector2.down * jumpForce;
+
+            }
+            else
+            {
+                _isJumping = false;
+            }
+
+
+
         }
     }
 
     private void HandleJumpGravity()
     {
-
-        if (_rigidbody2D.velocity.y < 0)
+        if (!_isFlipped)
         {
-            _rigidbody2D.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+            if (_rigidbody2D.velocity.y < 0)
+            {
+                _rigidbody2D.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
 
+            }
+            else if (_rigidbody2D.velocity.y > 0)
+            {
+                _rigidbody2D.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
+            }
         }
-        else if (_rigidbody2D.velocity.y > 0)
+
+        else
         {
-            _rigidbody2D.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
+            if (_rigidbody2D.velocity.y > 0)
+            {
+                _rigidbody2D.velocity += Vector2.down * -Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+
+            }
+            else if (_rigidbody2D.velocity.y < 0)
+            {
+                _rigidbody2D.velocity += Vector2.down * -Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
+            }
+
+
         }
     }
 

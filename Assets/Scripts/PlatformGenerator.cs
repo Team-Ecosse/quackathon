@@ -12,7 +12,6 @@ public class PlatformGenerator : MonoBehaviour {
 
 	// Use this for initialization
 	void Start() {
-		this.objectPools = FindObjectOfType<ObjectPooler> ();
 		this.platformWidth = objectPools.pooledObject.GetComponent<BoxCollider2D>().size.x;
 	}
 

@@ -5,6 +5,9 @@ using UnityEngine;
  */
 public class SoundManager : MonoBehaviour
 {
+    const int QUACK_MIN = 3;
+    const int QUACK_MAX = 10;
+
     public AudioSource music;
     public AudioSource quack;
     /**
@@ -12,13 +15,23 @@ public class SoundManager : MonoBehaviour
      */
     public PlayerController player;
 
+    private System.Random _quackInterval;
+
     void Awake()
     {
         music.Play();
+        _quackInterval = new System.Random();
     }
 
     void Start()
     {
-        player.handleJumpEventQueue.add(new AudioPlayingEvent(quack));
+        Debug.Log("Yo");
+        Invoke("Quack", _quackInterval.Next(QUACK_MIN, QUACK_MAX));
+    }
+
+    void Quack()
+    {
+        quack.Play();
+        Invoke("Quack", _quackInterval.Next(QUACK_MIN, QUACK_MAX));
     }
 }

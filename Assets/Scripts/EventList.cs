@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EventQueue
+public class EventList
 {
-    private Queue<IEvent> _queue = new Queue<IEvent>();
+    private List<IEvent> _list = new List<IEvent>();
 
     public void add(IEvent eventToAdd)
     {
-        _queue.Enqueue(eventToAdd);
+        _list.Add(eventToAdd);
     }
     
     /**
@@ -15,9 +15,9 @@ public class EventQueue
      */
     public void execute()
     {
-        while (0 != _queue.Count)
+        foreach (IEvent currentEvent in _list)
         {
-            _queue.Dequeue().trigger();
+            currentEvent.trigger();
         }
     }
 }

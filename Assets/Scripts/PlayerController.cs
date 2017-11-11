@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class PlayerController : MonoBehaviour {
 
@@ -12,7 +13,8 @@ public class PlayerController : MonoBehaviour {
     [Header("Scene Ground Attributes & Checker")]
     [Space]
     public LayerMask groundLayer;
-    public Transform groundChecker;
+    public Transform BottomGroundCheckerTransform;
+    public Transform TopGroundCheckerTransform;
     public float groundCheckerRadius;
 
     [Space]
@@ -30,18 +32,24 @@ public class PlayerController : MonoBehaviour {
     private bool _isJumping;
 
     [SerializeField]
-    private bool _isGrounded;
+    private bool _isGroundedBottom;
+    [SerializeField]
+    private bool _isGroundedTop;
+
+    [SerializeField]
+    private bool _isFlipped;
 
     [Space]
     [Header("Microphone States")]
     [Space]
     private AudioClip _clipRecord = new AudioClip();
     private bool _isInitialized;
-    private int _sampleWindow = 128;
+    private const int _sampleWindow = 128;
     private string _device;
 
     public int micSensitivity;
-    public static float MicLoudness;
+    public int micFlipSensitivity;
+    public static float micLoudness;
 
     void Awake()
     {
@@ -49,7 +57,6 @@ public class PlayerController : MonoBehaviour {
         _rigidbody2D = GetComponent<Rigidbody2D>();
 
         InitMic();
-        _isInitialized = true;
     }
 
     void OnDisable()
@@ -69,34 +76,50 @@ public class PlayerController : MonoBehaviour {
 
     private void Move()
     {
+        _isGroundedBottom = IsGroundedBottom();
+        _isGroundedTop = IsGroundedTop();
+        
+        //HandleJumpGravity();
 		this.moveRight ();
-        _isGrounded = IsGrounded();
         HandleJumpGravity();
 
         // levelMax equals to the highest normalized value power 2, a small number because < 1
         // pass the value to a static var so we can access it from anywhere
 
-        MicLoudness = LevelMax() * 10000;
-        Debug.Log(MicLoudness);
+        micLoudness = LevelMax() * 10000;
 
-        if (MicLoudness > micSensitivity) HandleJump();
+        if (micLoudness > micSensitivity) HandleJump();
+        if (micLoudness > micFlipSensitivity) FlipPlayer();
     }
 
 	private void moveRight () {
 		_rigidbody2D.position = new Vector2(this._rigidbody2D.position.x + 0.1f, this._rigidbody2D.position.y);
 	}
 
-    private bool IsGrounded()
+    private bool IsGroundedBottom()
     {
-        return _isGrounded = Physics2D.OverlapCircle(groundChecker.position, groundCheckerRadius, groundLayer);
+        return _isGroundedBottom = Physics2D.OverlapCircle(BottomGroundCheckerTransform.position, groundCheckerRadius, groundLayer);
+    }
+    
+    private bool IsGroundedTop()
+    {
+        return _isGroundedTop = Physics2D.OverlapCircle(TopGroundCheckerTransform.position, groundCheckerRadius, groundLayer);
     }
 
     private void HandleJump()
     {
-        if (!_isJumping && _isGrounded)
+        if (!_isJumping && _isGroundedBottom || _isGroundedTop)
         {
             _isJumping = true;
-            _rigidbody2D.velocity = Vector2.up * jumpForce;
+            
+            if (!_isFlipped)
+            {
+                _rigidbody2D.velocity = Vector2.up * jumpForce;
+            }
+            else
+            {
+                _rigidbody2D.velocity = Vector2.down * jumpForce;
+            }
 
         }
         else
@@ -108,14 +131,29 @@ public class PlayerController : MonoBehaviour {
     private void HandleJumpGravity()
     {
 
-        if (_rigidbody2D.velocity.y < 0)
+        if (!_isFlipped)
         {
-            _rigidbody2D.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+            if (_rigidbody2D.velocity.y < 0)
+            {
+                _rigidbody2D.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
 
+            }
+            else if (_rigidbody2D.velocity.y > 0)
+            {
+                _rigidbody2D.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
+            }
         }
-        else if (_rigidbody2D.velocity.y > 0)
+        else
         {
-            _rigidbody2D.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
+            if (_rigidbody2D.velocity.y < 0)
+            {
+                _rigidbody2D.velocity += Vector2.down * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+
+            }
+            else if (_rigidbody2D.velocity.y > 0)
+            {
+                _rigidbody2D.velocity += Vector2.down * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
+            }
         }
     }
 
@@ -153,5 +191,12 @@ public class PlayerController : MonoBehaviour {
     void StopMicrophone()
     {
         Microphone.End(_device);
+    }
+
+    void FlipPlayer()
+    {
+        _isFlipped = !_isFlipped;
+
+        _rigidbody2D.gravityScale *= -1;
     }
 }

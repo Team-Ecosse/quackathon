@@ -78,7 +78,10 @@ public class PlayerController : MonoBehaviour {
     {
         _isGroundedBottom = IsGroundedBottom();
         _isGroundedTop = IsGroundedTop();
+        
         //HandleJumpGravity();
+		this.moveRight ();
+        HandleJumpGravity();
 
         // levelMax equals to the highest normalized value power 2, a small number because < 1
         // pass the value to a static var so we can access it from anywhere
@@ -88,6 +91,10 @@ public class PlayerController : MonoBehaviour {
         if (micLoudness > micSensitivity) HandleJump();
         if (micLoudness > micFlipSensitivity) FlipPlayer();
     }
+
+	private void moveRight () {
+		_rigidbody2D.position = new Vector2(this._rigidbody2D.position.x + 0.1f, this._rigidbody2D.position.y);
+	}
 
     private bool IsGroundedBottom()
     {
@@ -101,7 +108,7 @@ public class PlayerController : MonoBehaviour {
 
     private void HandleJump()
     {
-        if (!_isJumping && _isGroundedBottom && _isGroundedTop)
+        if (!_isJumping && _isGroundedBottom || _isGroundedTop)
         {
             _isJumping = true;
             

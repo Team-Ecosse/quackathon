@@ -66,9 +66,9 @@ public class GameManager : MonoBehaviour {
         PlayerManager.playerGainHealth(heal);
     }
 
-    public void ReturnPlayerHP()
+    public int ReturnPlayerHP()
     {
-        PlayerManager.returnPlayerHealth();
+        return PlayerManager.returnPlayerHealth();
     }
 
     public void PlayerLoseSco(int lose)
@@ -81,8 +81,8 @@ public class GameManager : MonoBehaviour {
         ScoreManager.playerAddScore(add);
     }
 
-    public void ReturnPlayerSco()
+    public int ReturnPlayerSco()
     {
-        ScoreManager.returnPlayerScore();
+        return ScoreManager.returnPlayerScore();
     }
 }

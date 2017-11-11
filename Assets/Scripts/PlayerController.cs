@@ -84,6 +84,8 @@ public class PlayerController : MonoBehaviour {
 
         if (micLoudness > micSensitivity) HandleJump();
         if (micLoudness > micSensitivity + micFlipSensitivity) FlipPlayer();
+        
+        if (_isFlipped) Physics2D.gravity = -Physics2D.gravity;
     }
 
     private bool IsGrounded()
@@ -167,6 +169,5 @@ public class PlayerController : MonoBehaviour {
     {
         _isFlipped = !_isFlipped;
         _groundCheckerYPosition = _groundCheckerYPosition * -1;
-        _rigidbody2D.gravityScale = _rigidbody2D.gravityScale * -1;
     }
 }

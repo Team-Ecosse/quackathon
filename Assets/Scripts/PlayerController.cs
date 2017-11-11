@@ -64,6 +64,7 @@ public class PlayerController : MonoBehaviour {
     // Update is called once per frame
     void FixedUpdate () {
         Move();
+        Debug.Log(MicLoudness);
     }
 
     private void Move()

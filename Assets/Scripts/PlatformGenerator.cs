@@ -20,7 +20,7 @@ public class PlatformGenerator : MonoBehaviour {
 	void Update () {
 		if (this.transform.position.x < generationPoint.position.x)
 		{
-			transform.position = new Vector3(transform.position.x + transform.position.y, transform.position.z);
+			transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
 
 			GameObject newPlatform = objectPools.getPooledObject();
 			newPlatform.transform.position = transform.position;

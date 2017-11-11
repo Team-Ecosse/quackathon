@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class PlayerController : MonoBehaviour {
 
@@ -12,9 +13,9 @@ public class PlayerController : MonoBehaviour {
     [Header("Scene Ground Attributes & Checker")]
     [Space]
     public LayerMask groundLayer;
-    public Transform GroundCheckerTransform;
+    public Transform BottomGroundCheckerTransform;
+    public Transform TopGroundCheckerTransform;
     public float groundCheckerRadius;
-    public float _groundCheckerYPosition;
 
     [Space]
     [Header("Player Jump Attributes")]
@@ -31,7 +32,9 @@ public class PlayerController : MonoBehaviour {
     private bool _isJumping;
 
     [SerializeField]
-    private bool _isGrounded;
+    private bool _isGroundedBottom;
+    [SerializeField]
+    private bool _isGroundedTop;
 
     [SerializeField]
     private bool _isFlipped;
@@ -52,7 +55,6 @@ public class PlayerController : MonoBehaviour {
     {
         _playerController = this;
         _rigidbody2D = GetComponent<Rigidbody2D>();
-        _groundCheckerYPosition = GroundCheckerTransform.position.y; 
 
         InitMic();
     }
@@ -74,7 +76,8 @@ public class PlayerController : MonoBehaviour {
 
     private void Move()
     {
-        _isGrounded = IsGrounded();
+        _isGroundedBottom = IsGroundedBottom();
+        _isGroundedTop = IsGroundedTop();
         //HandleJumpGravity();
 
         // levelMax equals to the highest normalized value power 2, a small number because < 1
@@ -83,19 +86,22 @@ public class PlayerController : MonoBehaviour {
         micLoudness = LevelMax() * 10000;
 
         if (micLoudness > micSensitivity) HandleJump();
-        if (micLoudness > micSensitivity + micFlipSensitivity) FlipPlayer();
-        
-        if (_isFlipped) Physics2D.gravity = -Physics2D.gravity;
+        if (micLoudness > micFlipSensitivity) FlipPlayer();
     }
 
-    private bool IsGrounded()
+    private bool IsGroundedBottom()
     {
-        return _isGrounded = Physics2D.OverlapCircle(GroundCheckerTransform.position, groundCheckerRadius, groundLayer);
+        return _isGroundedBottom = Physics2D.OverlapCircle(BottomGroundCheckerTransform.position, groundCheckerRadius, groundLayer);
+    }
+    
+    private bool IsGroundedTop()
+    {
+        return _isGroundedTop = Physics2D.OverlapCircle(TopGroundCheckerTransform.position, groundCheckerRadius, groundLayer);
     }
 
     private void HandleJump()
     {
-        if (!_isJumping && _isGrounded)
+        if (!_isJumping && _isGroundedBottom && _isGroundedTop)
         {
             _isJumping = true;
             
@@ -118,14 +124,29 @@ public class PlayerController : MonoBehaviour {
     private void HandleJumpGravity()
     {
 
-        if (_rigidbody2D.velocity.y < 0)
+        if (!_isFlipped)
         {
-            _rigidbody2D.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+            if (_rigidbody2D.velocity.y < 0)
+            {
+                _rigidbody2D.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
 
+            }
+            else if (_rigidbody2D.velocity.y > 0)
+            {
+                _rigidbody2D.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
+            }
         }
-        else if (_rigidbody2D.velocity.y > 0)
+        else
         {
-            _rigidbody2D.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
+            if (_rigidbody2D.velocity.y < 0)
+            {
+                _rigidbody2D.velocity += Vector2.down * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+
+            }
+            else if (_rigidbody2D.velocity.y > 0)
+            {
+                _rigidbody2D.velocity += Vector2.down * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
+            }
         }
     }
 
@@ -168,6 +189,7 @@ public class PlayerController : MonoBehaviour {
     void FlipPlayer()
     {
         _isFlipped = !_isFlipped;
-        _groundCheckerYPosition = _groundCheckerYPosition * -1;
+
+        _rigidbody2D.gravityScale *= -1;
     }
 }

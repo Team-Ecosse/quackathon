@@ -51,6 +51,9 @@ public class PlayerController : MonoBehaviour {
     public int micFlipSensitivity;
     public static float micLoudness;
 
+    public EventQueue flipEventQueue = new EventQueue();
+    public EventQueue handleJumpEventQueue = new EventQueue();
+
     void Awake()
     {
         _playerController = this;
@@ -108,6 +111,7 @@ public class PlayerController : MonoBehaviour {
 
     private void HandleJump()
     {
+        handleJumpEventQueue.execute();
         if (!_isJumping && _isGroundedBottom || _isGroundedTop)
         {
             _isJumping = true;
@@ -195,6 +199,8 @@ public class PlayerController : MonoBehaviour {
 
     void FlipPlayer()
     {
+        flipEventQueue.execute();
+
         _isFlipped = !_isFlipped;
 
         _rigidbody2D.gravityScale *= -1;

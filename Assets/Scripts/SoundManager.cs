@@ -5,8 +5,8 @@ using UnityEngine;
  */
 public class SoundManager : MonoBehaviour
 {
-    const int QUACK_MIN = 3;
-    const int QUACK_MAX = 10;
+    const int QUACK_MIN = 1;
+    const int QUACK_MAX = 3;
 
     public AudioSource music;
     public AudioSource quack;

@@ -9,51 +9,45 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1276070000648718}
+  m_RootGameObject: {fileID: 1548642137109520}
   m_IsPrefabParent: 1
---- !u!1 &1276070000648718
+--- !u!1 &1548642137109520
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4079205050000118}
-  - component: {fileID: 114379349482705628}
+  - component: {fileID: 4434318805424398}
+  - component: {fileID: 114577417648050132}
   m_Layer: 0
-  m_Name: GameManager
-  m_TagString: GameManager
+  m_Name: PlayerManager
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4079205050000118
+--- !u!4 &4434318805424398
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1276070000648718}
+  m_GameObject: {fileID: 1548642137109520}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.894142, y: -2.0646386, z: 0}
+  m_LocalPosition: {x: 0.91599625, y: 2.1216938, z: 0.08203273}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114379349482705628
+--- !u!114 &114577417648050132
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1276070000648718}
+  m_GameObject: {fileID: 1548642137109520}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85c67de7b617b6e40999e82e47aa6e99, type: 3}
+  m_Script: {fileID: 11500000, guid: ccce377d1d9ab50449fd8a3cc65d4be6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerManager: {fileID: 114577417648050132, guid: 8f7842445d36d314cacae17c17aa31a7,
-    type: 2}
-  ScoreManager: {fileID: 114580968712492858, guid: 736ec573814bdbc4998d0ed77f06b96a,
-    type: 2}
-  currentSceneIndex: 0
-  nextSceneIndex: 0

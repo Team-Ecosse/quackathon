@@ -5,9 +5,13 @@ using UnityEngine;
 public class CollectableController : MonoBehaviour
 {
 
+    public GameManager GameManager;
+
+    int score;
+
     private void Awake(){
 
-        int score = 10;
+        score = 10;
 
     }
 
@@ -18,8 +22,7 @@ public class CollectableController : MonoBehaviour
         {
 
             Debug.Log("Score added");
-            //PlayerScore playerScore = collision.gameObject.GetComponent<PlayerScore>();
-            //playerScore.AddScore(score);
+            GameManager.PlayerAddSco(score);
         }
     }
 }

@@ -12,8 +12,9 @@ public class PlayerController : MonoBehaviour {
     [Header("Scene Ground Attributes & Checker")]
     [Space]
     public LayerMask groundLayer;
-    public Transform groundChecker;
+    public Transform GroundCheckerTransform;
     public float groundCheckerRadius;
+    public float _groundCheckerYPosition;
 
     [Space]
     [Header("Player Jump Attributes")]
@@ -32,24 +33,28 @@ public class PlayerController : MonoBehaviour {
     [SerializeField]
     private bool _isGrounded;
 
+    [SerializeField]
+    private bool _isFlipped;
+
     [Space]
     [Header("Microphone States")]
     [Space]
     private AudioClip _clipRecord = new AudioClip();
     private bool _isInitialized;
-    private int _sampleWindow = 128;
+    private const int _sampleWindow = 128;
     private string _device;
 
     public int micSensitivity;
-    public static float MicLoudness;
+    public int micFlipSensitivity;
+    public static float micLoudness;
 
     void Awake()
     {
         _playerController = this;
         _rigidbody2D = GetComponent<Rigidbody2D>();
+        _groundCheckerYPosition = GroundCheckerTransform.position.y; 
 
         InitMic();
-        _isInitialized = true;
     }
 
     void OnDisable()
@@ -70,20 +75,20 @@ public class PlayerController : MonoBehaviour {
     private void Move()
     {
         _isGrounded = IsGrounded();
-        HandleJumpGravity();
+        //HandleJumpGravity();
 
         // levelMax equals to the highest normalized value power 2, a small number because < 1
         // pass the value to a static var so we can access it from anywhere
 
-        MicLoudness = LevelMax() * 10000;
-        Debug.Log(MicLoudness);
+        micLoudness = LevelMax() * 10000;
 
-        if (MicLoudness > micSensitivity) HandleJump();
+        if (micLoudness > micSensitivity) HandleJump();
+        if (micLoudness > micSensitivity + micFlipSensitivity) FlipPlayer();
     }
 
     private bool IsGrounded()
     {
-        return _isGrounded = Physics2D.OverlapCircle(groundChecker.position, groundCheckerRadius, groundLayer);
+        return _isGrounded = Physics2D.OverlapCircle(GroundCheckerTransform.position, groundCheckerRadius, groundLayer);
     }
 
     private void HandleJump()
@@ -91,7 +96,15 @@ public class PlayerController : MonoBehaviour {
         if (!_isJumping && _isGrounded)
         {
             _isJumping = true;
-            _rigidbody2D.velocity = Vector2.up * jumpForce;
+            
+            if (!_isFlipped)
+            {
+                _rigidbody2D.velocity = Vector2.up * jumpForce;
+            }
+            else
+            {
+                _rigidbody2D.velocity = Vector2.down * jumpForce;
+            }
 
         }
         else
@@ -148,5 +161,12 @@ public class PlayerController : MonoBehaviour {
     void StopMicrophone()
     {
         Microphone.End(_device);
+    }
+
+    void FlipPlayer()
+    {
+        _isFlipped = !_isFlipped;
+        _groundCheckerYPosition = _groundCheckerYPosition * -1;
+        _rigidbody2D.gravityScale = _rigidbody2D.gravityScale * -1;
     }
 }

@@ -131,14 +131,17 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
-  groundChecker: {fileID: 4926120446044840}
+  GroundCheckerTransform: {fileID: 4926120446044840}
   groundCheckerRadius: 0.25
+  _groundCheckerYPosition: 0
   jumpForce: 9
   fallMultiplier: 3.5
   lowJumpMultiplier: 2.5
   _isJumping: 0
   _isGrounded: 0
-  micSensitivity: 30
+  _isFlipped: 0
+  micSensitivity: 20
+  micFlipSensitivity: 45
 --- !u!212 &212710088405334182
 SpriteRenderer:
   m_ObjectHideFlags: 1

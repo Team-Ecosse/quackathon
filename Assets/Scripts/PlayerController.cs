@@ -69,6 +69,7 @@ public class PlayerController : MonoBehaviour {
 
     private void Move()
     {
+		this.moveRight ();
         _isGrounded = IsGrounded();
         HandleJumpGravity();
 
@@ -80,6 +81,10 @@ public class PlayerController : MonoBehaviour {
 
         if (MicLoudness > micSensitivity) HandleJump();
     }
+
+	private void moveRight () {
+		_rigidbody2D.position = new Vector2(this._rigidbody2D.position.x + 0.1f, this._rigidbody2D.position.y);
+	}
 
     private bool IsGrounded()
     {

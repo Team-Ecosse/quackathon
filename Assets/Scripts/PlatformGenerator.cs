@@ -6,7 +6,7 @@ public class PlatformGenerator : MonoBehaviour {
 
 	public Transform generationPoint;
 
-	public int platformWidth;
+	public float platformWidth;
 
 	public ObjectPooler objectPools;
 
@@ -20,14 +20,14 @@ public class PlatformGenerator : MonoBehaviour {
 	void Update () {
 		if (this.transform.position.x < generationPoint.position.x)
 		{
-			transform.position = new Vector3(transform.position.x + (platformWidths[platformSelector] / 2) + distanceBetweenPlatforms, heightChange, transform.position.z);
+			transform.position = new Vector3(transform.position.x + transform.position.y, transform.position.z);
 
-			GameObject newPlatform = objectPools[platformSelector].getPooledObject();
+			GameObject newPlatform = objectPools.getPooledObject();
 			newPlatform.transform.position = transform.position;
 			newPlatform.transform.rotation = transform.rotation;
 			newPlatform.SetActive(true);
 
-			transform.position = new Vector3(transform.position.x + (platformWidths[platformSelector] / 2), transform.position.y, transform.position.z);
+			transform.position = new Vector3(transform.position.x + this.platformWidth, transform.position.y, transform.position.z);
 		}
 	}    
 }

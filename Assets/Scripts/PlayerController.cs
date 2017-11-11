@@ -64,7 +64,6 @@ public class PlayerController : MonoBehaviour {
     // Update is called once per frame
     void FixedUpdate () {
         Move();
-        Debug.Log(MicLoudness);
     }
 
     private void Move()
@@ -76,8 +75,9 @@ public class PlayerController : MonoBehaviour {
         // pass the value to a static var so we can access it from anywhere
 
         MicLoudness = LevelMax() * 10000;
+        Debug.Log(MicLoudness);
 
-        if (MicLoudness > 25) HandleJump(true);
+        if (MicLoudness > 25) HandleJump();
     }
 
     private bool IsGrounded()
@@ -85,10 +85,9 @@ public class PlayerController : MonoBehaviour {
         return _isGrounded = Physics2D.OverlapCircle(groundChecker.position, groundCheckerRadius, groundLayer);
     }
 
-    private void HandleJump(bool jump)
+    private void HandleJump()
     {
-
-        if (jump && !_isJumping && _isGrounded)
+        if (!_isJumping && _isGrounded)
         {
             _isJumping = true;
             _rigidbody2D.velocity = Vector2.up * jumpForce;
@@ -96,7 +95,7 @@ public class PlayerController : MonoBehaviour {
         }
         else
         {
-            _isJumping = jump;
+            _isJumping = false;
         }
     }
 

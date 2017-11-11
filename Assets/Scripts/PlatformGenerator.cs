@@ -6,13 +6,13 @@ public class PlatformGenerator : MonoBehaviour {
 
 	public Transform generationPoint;
 
-	public float platformWidth;
+	public float objectWidth;
 
 	public ObjectPooler objectPools;
 
 	// Use this for initialization
 	void Start() {
-		this.platformWidth = objectPools.pooledObject.GetComponent<BoxCollider2D>().size.x;
+		this.objectWidth = objectPools.pooledObject.GetComponent<BoxCollider2D>().size.x;
 	}
 
 	// Update is called once per frame
@@ -26,7 +26,7 @@ public class PlatformGenerator : MonoBehaviour {
 			newPlatform.transform.rotation = transform.rotation;
 			newPlatform.SetActive(true);
 
-			transform.position = new Vector3(transform.position.x + this.platformWidth, transform.position.y, transform.position.z);
+			transform.position = new Vector3(transform.position.x + this.objectWidth, transform.position.y, transform.position.z);
 		}
 	}    
 }

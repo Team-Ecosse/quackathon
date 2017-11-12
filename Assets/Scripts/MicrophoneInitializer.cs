@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.UI; //for accessing Sliders and Dropdown
 using System.Collections.Generic; // So we can use List<>
 
 [RequireComponent(typeof(AudioSource))]

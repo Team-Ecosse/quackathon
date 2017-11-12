@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour {
     private int nextSceneIndex;
 
     void Awake() {
-
+        
         currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         nextSceneIndex = (SceneManager.GetActiveScene().buildIndex + 1);
     }
@@ -84,5 +84,10 @@ public class GameManager : MonoBehaviour {
     public int ReturnPlayerSco()
     {
         return ScoreManager.returnPlayerScore();
+    }
+
+    public int GetCurrentSceneIndex()
+    {
+        return currentSceneIndex;
     }
 }

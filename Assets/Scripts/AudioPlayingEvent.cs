@@ -9,7 +9,7 @@ public class AudioPlayingEvent : IEvent
         audio_ = audio;
     }
 
-    public void trigger()
+    public void Trigger()
     {
         Debug.Log("music playing");
         audio_.Play();

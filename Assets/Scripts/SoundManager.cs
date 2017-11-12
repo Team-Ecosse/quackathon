@@ -5,33 +5,40 @@ using UnityEngine;
  */
 public class SoundManager : MonoBehaviour
 {
-    const int QUACK_MIN = 1;
-    const int QUACK_MAX = 3;
 
-    public AudioSource music;
+    public AudioSource gameMusic;
+    public AudioSource menuMusic;
     public AudioSource quack;
+    public GameManager gameManager;
+    public MainMenu mainMenu;
     /**
      * @todo player
      */
     public PlayerController player;
 
-    private System.Random _quackInterval;
+    /*
+     * @todo alphabetical order
+     */
+    private GameStartEvent _gameResuming;
+    private GamePausingEvent _gamePausing;
+    private MenuOpeningEvent _menuOpening;
+    private MenuClosingEvent _menuClosing;
 
     void Awake()
     {
-        music.Play();
-        _quackInterval = new System.Random();
+        DontDestroyOnLoad(transform.gameObject);
+        _menuOpening = new MenuOpeningEvent(menuMusic);
+        _menuClosing = new MenuClosingEvent(menuMusic);
+        _gameResuming = new GameStartEvent(gameMusic, quack, gameManager);
+        _gamePausing = new GamePausingEvent(gameMusic);
     }
 
     void Start()
     {
-        Debug.Log("Yo");
-        Invoke("Quack", _quackInterval.Next(QUACK_MIN, QUACK_MAX));
-    }
-
-    void Quack()
-    {
-        quack.Play();
-        Invoke("Quack", _quackInterval.Next(QUACK_MIN, QUACK_MAX));
+        mainMenu.startGameEventList.Add(_gameResuming);
+        mainMenu.startGameEventList.Add(_menuClosing);
+        mainMenu.returnToMainMenuEventList.Add(_gamePausing);
+        _menuOpening.Trigger();
+        //InitialiseMenu();
     }
 }

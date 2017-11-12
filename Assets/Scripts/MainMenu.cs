@@ -20,6 +20,9 @@ public class MainMenu : MonoBehaviour {
 
     public GameObject _mainMenuUI;
 
+    public EventList startGameEventList = new EventList();
+    public EventList returnToMainMenuEventList = new EventList();
+
     void Start () {
 
         _eventSystem = GameObject.Find("EventSystem");
@@ -29,6 +32,7 @@ public class MainMenu : MonoBehaviour {
 	}
 
     public void StartGame() {
+        startGameEventList.Execute();
         _gameManager.ProgressToNextScene();
     }
 
@@ -47,7 +51,7 @@ public class MainMenu : MonoBehaviour {
     }
 
     public void ReturnToMainMenu() {
-        
+        returnToMainMenuEventList.Execute();
         _mainMenuUI.SetActive(true);
 
         _eventSystem.GetComponent<UnityEngine.EventSystems.EventSystem>()

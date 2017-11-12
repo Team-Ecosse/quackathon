@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerManager : MonoBehaviour {
+public class PlayerManager : MonoBehaviour
+{
 
     int playerHealth;
+
 
     public void setHealth(int health)
     {
@@ -13,8 +15,10 @@ public class PlayerManager : MonoBehaviour {
     }
 
     public void playerTakenDMG(int damage){
-
+        
         playerHealth -= damage;
+
+        if (playerHealth <= 0) GameManager.ResetScene();
 
     }
 

@@ -50,9 +50,9 @@ public class GameManager : MonoBehaviour {
         SceneManager.LoadSceneAsync(nextSceneIndex);
     }
 
-    public void ResetScene() {
-
-        SceneManager.LoadSceneAsync(currentSceneIndex);
+    public static void ResetScene() {
+        
+        SceneManager.LoadSceneAsync(1);
     }
 
     public void ExitGame() {

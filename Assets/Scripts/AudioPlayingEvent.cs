@@ -11,7 +11,7 @@ public class AudioPlayingEvent : IEvent
 
     public void Trigger()
     {
-        Debug.Log("music playing");
+        ////Debug.Log("music playing");
         audio_.Play();
     }
 }

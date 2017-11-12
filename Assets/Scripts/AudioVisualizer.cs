@@ -28,7 +28,6 @@ public class AudioVisualizer : MonoBehaviour
         // populate array with fequency spectrum data
         GetComponent<AudioSource>().GetSpectrumData(spectrum, 0, fftWindow);
 
-
         // loop over audioSpectrumObjects and modify according to fequency spectrum data
         // this loop matches the Array element to an object on a One-to-One basis.
         for (int i = 0; i < audioSpectrumObjects.Length; i++)

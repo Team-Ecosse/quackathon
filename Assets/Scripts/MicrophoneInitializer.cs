@@ -6,13 +6,14 @@ public class MicrophoneInitializer : MonoBehaviour
 {
     public float minThreshold = 0;
     public float frequency = 0.0f;
-    public int audioSampleRate = 44100;
     public string microphone;
     public FFTWindow fftWindow;
 
     private List<string> options = new List<string>();
     private int samples = 8192; 
     private AudioSource audioSource;
+    private int _minFreq;
+    private int _maxFreq;
 
     void Start()
     {
@@ -28,6 +29,8 @@ public class MicrophoneInitializer : MonoBehaviour
             }
         }
 
+        Microphone.GetDeviceCaps(microphone, out _minFreq, out _maxFreq);
+
         //initialize input with default mic
         UpdateMicrophone();
     }
@@ -36,7 +39,7 @@ public class MicrophoneInitializer : MonoBehaviour
     {
         audioSource.Stop(); 
         //Start recording to audioclip from the mic
-        audioSource.clip = Microphone.Start(microphone, true, 10, audioSampleRate);
+        audioSource.clip = Microphone.Start(microphone, true, 10, _minFreq);
         audioSource.loop = true; 
         // Mute the sound with an Audio Mixer group becuase we don't want the player to hear it
         Debug.Log(Microphone.IsRecording(microphone).ToString());
@@ -88,7 +91,7 @@ public class MicrophoneInitializer : MonoBehaviour
                 }
             }
         }
-        fundamentalFrequency = i * audioSampleRate / samples;
+        fundamentalFrequency = i * _minFreq / samples;
         frequency = fundamentalFrequency;
         return fundamentalFrequency;
     }

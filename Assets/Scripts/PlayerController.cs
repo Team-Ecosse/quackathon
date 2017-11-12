@@ -5,6 +5,10 @@ using UnityEngine.Rendering;
 
 public class PlayerController : MonoBehaviour {
 
+    public MicrophoneInitializer _micInit;
+
+    public int sensitivity = 5000;
+
     [Header("Required GameObject Refs.")]
     [Space]
     private static PlayerController _playerController;
@@ -91,10 +95,11 @@ public class PlayerController : MonoBehaviour {
         // levelMax equals to the highest normalized value power 2, a small number because < 1
         // pass the value to a static var so we can access it from anywhere
 
-        micLoudness = LevelMax() * 10000;
+        micLoudness = _micInit.GetAveragedVolume() * sensitivity;
+
+        //Debug.Log(micLoudness);
 
         if (micLoudness > micSensitivity && !_isJumping) HandleJump();
-        if (micLoudness > micFlipSensitivity && !_isJumping) FlipPlayer();
         HandleJumpGravity();
     }
 
@@ -196,7 +201,7 @@ public class PlayerController : MonoBehaviour {
         Microphone.End(_device);
     }
 
-    void FlipPlayer()
+    public void FlipPlayer()
     {
         if (_isGroundedBottom || _isGroundedTop)
         {   
@@ -210,6 +215,55 @@ public class PlayerController : MonoBehaviour {
         }        
     }
 
+    public bool IsPlayerInRedPitch(float[] heightsDistribution)
+    {
+        float[] redPitches = { heightsDistribution[8], heightsDistribution[9], heightsDistribution[10], heightsDistribution[11], heightsDistribution[12], heightsDistribution[13] };
+        float[] normalPitches = {
+            heightsDistribution[0],
+            heightsDistribution[1],
+            heightsDistribution[2],
+            heightsDistribution[3],
+            heightsDistribution[4],
+            heightsDistribution[5],
+            heightsDistribution[6],
+            heightsDistribution[7],
+            heightsDistribution[14],
+            heightsDistribution[15],
+            heightsDistribution[16],
+            heightsDistribution[17],
+            heightsDistribution[18],
+            heightsDistribution[19],
+            heightsDistribution[20],
+            heightsDistribution[21],
+            heightsDistribution[22],
+            heightsDistribution[23],
+            heightsDistribution[24],
+            heightsDistribution[25],
+            heightsDistribution[26],
+            heightsDistribution[27],
+            heightsDistribution[28],
+            heightsDistribution[29]
+        };
+
+        bool redPitchesUberAlles = true;
+        foreach (float currentNormalPitch in normalPitches)
+        {
+            bool isAbovePitch = false;
+            foreach (float currentRedPitch in redPitches)
+            {
+                if (currentRedPitch > currentNormalPitch * 1.5)
+                {
+                    isAbovePitch = true;
+                }
+            }
+            if (!isAbovePitch)
+            {
+                redPitchesUberAlles = false;
+            }
+        }
+        return redPitchesUberAlles;
+    }
+    
 	void pauseGame () {
 		if (Input.GetKeyDown (KeyCode.Space)) {
 			Time.timeScale = 0;

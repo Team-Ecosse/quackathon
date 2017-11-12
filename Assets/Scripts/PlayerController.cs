@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour {
     public int micSensitivity;
     public int micFlipSensitivity;
     public static float micLoudness;
-
+	public GameObject pauseUI;
     public EventList flipEventList = new EventList();
 
     void Awake()
@@ -64,7 +64,8 @@ public class PlayerController : MonoBehaviour {
         _playerController = this;
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _spriterenderer = GetComponent<SpriteRenderer>();
-
+		pauseUI = GameObject.Find ("PauseUI");
+		pauseUI.SetActive (false);
         InitMic();
     }
 
@@ -81,6 +82,7 @@ public class PlayerController : MonoBehaviour {
     // Update is called once per frame
     void FixedUpdate () {
         Move();
+		pauseGame ();
     }
 
     private void Move()
@@ -261,4 +263,11 @@ public class PlayerController : MonoBehaviour {
         }
         return redPitchesUberAlles;
     }
+    
+	void pauseGame () {
+		if (Input.GetKeyDown (KeyCode.Space)) {
+			Time.timeScale = 0;
+			pauseUI.SetActive (true);
+		}
+	}
 }

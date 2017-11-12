@@ -21,12 +21,10 @@ public class CollectableController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-
         if (collision.tag == "Player")
         {
-
-            Debug.Log("Score added");
             _gm.PlayerAddSco(10);
+            gameObject.SetActive(false);
         }
     }
 }

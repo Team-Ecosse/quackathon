@@ -55,45 +55,12 @@ public class AudioVisualizer : MonoBehaviour
             heightsDistribution[i] = 1 / lerpY;
         }
 
-        float[] eightToTen = { heightsDistribution[8], heightsDistribution[9], heightsDistribution[10] };
-        float[] rest = {
-            heightsDistribution[0],
-            heightsDistribution[1],
-            heightsDistribution[2],
-            heightsDistribution[3],
-            heightsDistribution[4],
-            heightsDistribution[5],
-            heightsDistribution[6],
-            heightsDistribution[7],
-            heightsDistribution[11],
-            heightsDistribution[12],
-            heightsDistribution[13],
-            heightsDistribution[14],
-            heightsDistribution[15],
-            heightsDistribution[16],
-            heightsDistribution[17],
-            heightsDistribution[18],
-            heightsDistribution[19],
-            heightsDistribution[20],
-            heightsDistribution[21],
-            heightsDistribution[22],
-            heightsDistribution[23],
-            heightsDistribution[24],
-            heightsDistribution[25],
-            heightsDistribution[26],
-            heightsDistribution[27],
-            heightsDistribution[28],
-            heightsDistribution[29]
-        };
-        if (GetAverage(rest) / GetAverage(eightToTen) > 40)
+        if (!_flipping && IsRedPitchDominating(heightsDistribution))
         {
-            if (!_flipping)
-            {
-
-                player.FlipPlayer();
-                _flipping = true;
-            }
-        } else
+            player.FlipPlayer();
+            _flipping = true;
+        }
+        else
         {
             _flipping = false;
         }
@@ -124,5 +91,43 @@ public class AudioVisualizer : MonoBehaviour
             average += floatArray[i] / arraySize;
         }
         return average;
+    }
+
+    /**
+     * @todo to improve
+     */
+    private bool IsRedPitchDominating(float[] allPitches)
+    {
+        float[] redPitches = { allPitches[8], allPitches[9], allPitches[10] };
+        float[] nommalPitches = {
+            allPitches[0],
+            allPitches[1],
+            allPitches[2],
+            allPitches[3],
+            allPitches[4],
+            allPitches[5],
+            allPitches[6],
+            allPitches[7],
+            allPitches[11],
+            allPitches[12],
+            allPitches[13],
+            allPitches[14],
+            allPitches[15],
+            allPitches[16],
+            allPitches[17],
+            allPitches[18],
+            allPitches[19],
+            allPitches[20],
+            allPitches[21],
+            allPitches[22],
+            allPitches[23],
+            allPitches[24],
+            allPitches[25],
+            allPitches[26],
+            allPitches[27],
+            allPitches[28],
+            allPitches[29]
+        };
+        return GetAverage(nommalPitches) / GetAverage(redPitches) > 40;
     }
 }

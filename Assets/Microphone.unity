@@ -232,7 +232,8 @@ AudioSource:
   m_GameObject: {fileID: 296167561}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: ec1c8a3af18ac7547a2ced16e94c1028,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -330,11 +331,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minThreshold: 0
   frequency: 0
-  audioSampleRate: 44100
   microphone: 
   fftWindow: 0
-  micDropdown: {fileID: 0}
-  thresholdSlider: {fileID: 0}
 --- !u!1 &403086413
 GameObject:
   m_ObjectHideFlags: 0

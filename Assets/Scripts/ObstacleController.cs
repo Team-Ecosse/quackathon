@@ -4,14 +4,26 @@ using UnityEngine;
 
 public class ObstacleController : MonoBehaviour {
 
+    public GameManager GameManager;
+    int damage;
+
+
+    private void Awake()
+    {
+
+        damage = 1;
+
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
         if (collision.tag == "Player"){
 
             Debug.Log("Player hit!");
-            //PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
-            //playerHealth.TakeDamage();
+
+            GameManager.PlayerTakeDamage(damage);
+
         }
     }
 }

@@ -98,7 +98,6 @@ public class PlayerController : MonoBehaviour {
         //Debug.Log(micLoudness);
 
         if (micLoudness > micSensitivity && !_isJumping) HandleJump();
-        if (micLoudness > micFlipSensitivity && !_isJumping) FlipPlayer();
         HandleJumpGravity();
     }
 

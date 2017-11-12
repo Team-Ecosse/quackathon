@@ -28,6 +28,8 @@ public class GameManager : MonoBehaviour {
         
         currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         nextSceneIndex = (SceneManager.GetActiveScene().buildIndex + 1);
+
+        PlayerManager.setHealth(3);
     }
 
     /*

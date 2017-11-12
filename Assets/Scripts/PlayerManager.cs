@@ -4,16 +4,13 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour {
 
-
     int playerHealth;
 
-    // Use this for initialization
-    void Start () {
+    public void setHealth(int health)
+    {
 
-        playerHealth = 3;
-		
-	}
-	
+        playerHealth = health;
+    }
 
     public void playerTakenDMG(int damage){
 

@@ -13,7 +13,7 @@ public class AudioVisualizer : MonoBehaviour
 
     public PlayerController player;
 
-    private bool _flipping = false;
+    private bool _isFlipping = false;
 
     /*
     * The intensity of the frequencies found between 0 and 44100 will be
@@ -55,14 +55,11 @@ public class AudioVisualizer : MonoBehaviour
             heightsDistribution[i] = 1 / lerpY;
         }
 
-        if (!_flipping && IsRedPitchDominating(heightsDistribution))
+        if (!_isFlipping && IsPlayerInRedPitch(heightsDistribution))
         {
+            _isFlipping = true;
+            Invoke("SetIsFlippingToFalse", 1);
             player.FlipPlayer();
-            _flipping = true;
-        }
-        else
-        {
-            _flipping = false;
         }
     }
 
@@ -125,7 +122,7 @@ public class AudioVisualizer : MonoBehaviour
             allPitches[28],
             allPitches[29]
         };
-        return GetAverage(normalPitches) / GetAverage(redPitches) > 5;
+        return GetAverage(normalPitches) / GetAverage(redPitches) > 30;
     }
 
     public bool IsPlayerInRedPitch(float[] heightsDistribution)
@@ -175,5 +172,10 @@ public class AudioVisualizer : MonoBehaviour
             }
         }
         return redPitchesUberAlles;
+    }
+
+    private void SetIsFlippingToFalse()
+    {
+        _isFlipping = false;
     }
 }

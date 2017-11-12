@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 212842076722644250}
   - component: {fileID: 114726972421685690}
   m_Layer: 8
-  m_Name: Obstacle
+  m_Name: Spikes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

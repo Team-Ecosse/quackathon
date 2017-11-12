@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour {
 
     public MicrophoneInitializer _micInit;
 
+    public int sensitivity = 5000;
+
     [Header("Required GameObject Refs.")]
     [Space]
     private static PlayerController _playerController;
@@ -91,7 +93,7 @@ public class PlayerController : MonoBehaviour {
         // levelMax equals to the highest normalized value power 2, a small number because < 1
         // pass the value to a static var so we can access it from anywhere
 
-        micLoudness = _micInit.GetAveragedVolume() * 1000;
+        micLoudness = _micInit.GetAveragedVolume() * sensitivity;
 
         //Debug.Log(micLoudness);
 

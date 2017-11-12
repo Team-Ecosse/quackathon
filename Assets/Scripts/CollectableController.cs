@@ -5,13 +5,17 @@ using UnityEngine;
 public class CollectableController : MonoBehaviour
 {
 
-    public GameManager GameManager;
+    private GameObject _gameObject;
+    private GameManager _gm;
 
     int score;
 
     private void Awake(){
 
         score = 10;
+        
+        _gameObject = GameObject.FindGameObjectWithTag("GameManager");
+        _gm = _gameObject.GetComponent<GameManager>();
 
     }
 
@@ -22,7 +26,7 @@ public class CollectableController : MonoBehaviour
         {
 
             Debug.Log("Score added");
-            GameManager.PlayerAddSco(score);
+            _gm.PlayerAddSco(10);
         }
     }
 }

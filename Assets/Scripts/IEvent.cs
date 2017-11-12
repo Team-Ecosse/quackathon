@@ -3,5 +3,5 @@
  **/
 public interface IEvent
 {
-    void trigger();
+    void Trigger();
 }

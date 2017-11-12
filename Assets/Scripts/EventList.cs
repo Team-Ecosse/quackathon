@@ -5,7 +5,7 @@ public class EventList
 {
     private List<IEvent> _list = new List<IEvent>();
 
-    public void add(IEvent eventToAdd)
+    public void Add(IEvent eventToAdd)
     {
         _list.Add(eventToAdd);
     }
@@ -13,11 +13,11 @@ public class EventList
     /**
      * @todo threaded
      */
-    public void execute()
+    public void Execute()
     {
         foreach (IEvent currentEvent in _list)
         {
-            currentEvent.trigger();
+            currentEvent.Trigger();
         }
     }
 }

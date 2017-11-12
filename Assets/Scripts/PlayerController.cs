@@ -200,7 +200,7 @@ public class PlayerController : MonoBehaviour {
 
     void FlipPlayer()
     {
-        flipEventList.execute();
+        flipEventList.Execute();
 
         _isFlipped = !_isFlipped;
 

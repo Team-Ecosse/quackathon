@@ -9,8 +9,6 @@ public class MicrophoneInitializer : MonoBehaviour
     public int audioSampleRate = 44100;
     public string microphone;
     public FFTWindow fftWindow;
-    public Dropdown micDropdown;
-    public Slider thresholdSlider;
 
     private List<string> options = new List<string>();
     private int samples = 8192; 
@@ -58,16 +56,6 @@ public class MicrophoneInitializer : MonoBehaviour
             //microphone doesn't work for some reason
             Debug.Log(microphone + " doesn't work!");
         }
-    }
-
-
-    public void micDropdownValueChangedHandler(Dropdown mic){
-        microphone = options[mic.value];
-        UpdateMicrophone ();
-    }
-
-    public void thresholdValueChangedHandler(Slider thresholdSlider){
-        minThreshold = thresholdSlider.value;
     }
 	
     public float GetAveragedVolume()

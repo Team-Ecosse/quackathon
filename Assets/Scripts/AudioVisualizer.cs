@@ -98,8 +98,8 @@ public class AudioVisualizer : MonoBehaviour
      */
     private bool IsRedPitchDominating(float[] allPitches)
     {
-        float[] redPitches = { allPitches[8], allPitches[9], allPitches[10] };
-        float[] nommalPitches = {
+        float[] redPitches = { allPitches[8], allPitches[9], allPitches[10], allPitches[11], allPitches[12], allPitches[13] };
+        float[] normalPitches = {
             allPitches[0],
             allPitches[1],
             allPitches[2],
@@ -108,9 +108,6 @@ public class AudioVisualizer : MonoBehaviour
             allPitches[5],
             allPitches[6],
             allPitches[7],
-            allPitches[11],
-            allPitches[12],
-            allPitches[13],
             allPitches[14],
             allPitches[15],
             allPitches[16],
@@ -128,6 +125,55 @@ public class AudioVisualizer : MonoBehaviour
             allPitches[28],
             allPitches[29]
         };
-        return GetAverage(nommalPitches) / GetAverage(redPitches) > 40;
+        return GetAverage(normalPitches) / GetAverage(redPitches) > 5;
+    }
+
+    public bool IsPlayerInRedPitch(float[] heightsDistribution)
+    {
+        float[] redPitches = { heightsDistribution[8], heightsDistribution[9], heightsDistribution[10], heightsDistribution[11], heightsDistribution[12], heightsDistribution[13] };
+        float[] normalPitches = {
+            heightsDistribution[0],
+            heightsDistribution[1],
+            heightsDistribution[2],
+            heightsDistribution[3],
+            heightsDistribution[4],
+            heightsDistribution[5],
+            heightsDistribution[6],
+            heightsDistribution[7],
+            heightsDistribution[14],
+            heightsDistribution[15],
+            heightsDistribution[16],
+            heightsDistribution[17],
+            heightsDistribution[18],
+            heightsDistribution[19],
+            heightsDistribution[20],
+            heightsDistribution[21],
+            heightsDistribution[22],
+            heightsDistribution[23],
+            heightsDistribution[24],
+            heightsDistribution[25],
+            heightsDistribution[26],
+            heightsDistribution[27],
+            heightsDistribution[28],
+            heightsDistribution[29]
+        };
+
+        bool redPitchesUberAlles = true;
+        foreach (float currentNormalPitch in normalPitches)
+        {
+            bool isAbovePitch = false;
+            foreach (float currentRedPitch in redPitches)
+            {
+                if (currentRedPitch > currentNormalPitch * 1.5)
+                {
+                    isAbovePitch = true;
+                }
+            }
+            if (!isAbovePitch)
+            {
+                redPitchesUberAlles = false;
+            }
+        }
+        return redPitchesUberAlles;
     }
 }

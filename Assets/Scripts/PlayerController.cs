@@ -213,9 +213,9 @@ public class PlayerController : MonoBehaviour {
         }        
     }
 
-    public bool isPlayerInRedPitch(float[] heightsDistribution)
+    public bool IsPlayerInRedPitch(float[] heightsDistribution)
     {
-        float[] redPitches = { heightsDistribution[8], heightsDistribution[9], heightsDistribution[10] };
+        float[] redPitches = { heightsDistribution[8], heightsDistribution[9], heightsDistribution[10], heightsDistribution[11], heightsDistribution[12], heightsDistribution[13] };
         float[] normalPitches = {
             heightsDistribution[0],
             heightsDistribution[1],
@@ -225,9 +225,6 @@ public class PlayerController : MonoBehaviour {
             heightsDistribution[5],
             heightsDistribution[6],
             heightsDistribution[7],
-            heightsDistribution[11],
-            heightsDistribution[12],
-            heightsDistribution[13],
             heightsDistribution[14],
             heightsDistribution[15],
             heightsDistribution[16],

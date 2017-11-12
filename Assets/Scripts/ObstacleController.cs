@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class ObstacleController : MonoBehaviour {
 
-    public GameManager GameManager;
+    private GameObject _gameObject;
+    private GameManager _gm;
     int damage;
 
 
@@ -12,18 +13,18 @@ public class ObstacleController : MonoBehaviour {
     {
 
         damage = 1;
+        
+        _gameObject = GameObject.FindGameObjectWithTag("GameManager");
+        _gm = _gameObject.GetComponent<GameManager>();
 
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-
-        if (collision.tag == "Player"){
-
-            //Debug.Log("Player hit!");
-
-            GameManager.PlayerTakeDamage(damage);
-
+        if (collision.tag == "Player")
+        {
+            _gm.PlayerTakeDamage(damage);
+            gameObject.SetActive(false);
         }
     }
 }

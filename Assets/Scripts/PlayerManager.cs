@@ -2,22 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerManager : MonoBehaviour {
-
+public class PlayerManager : MonoBehaviour
+{
 
     int playerHealth;
 
-    // Use this for initialization
-    void Start () {
 
-        playerHealth = 3;
-		
-	}
-	
+    public void setHealth(int health)
+    {
+
+        playerHealth = health;
+    }
 
     public void playerTakenDMG(int damage){
-
+        
         playerHealth -= damage;
+
+        if (playerHealth <= 0) GameManager.ResetScene();
 
     }
 

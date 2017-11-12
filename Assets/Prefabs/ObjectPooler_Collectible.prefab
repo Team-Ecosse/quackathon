@@ -111,9 +111,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 642642d58e7a15d49a961691d24bbd1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pooledObject: {fileID: 1761622459054772, guid: 5cb6ec46dfbe3a64bb2b08dc9520c8c1,
+  pooledObject: {fileID: 1037007728021440, guid: 06d0a9ebecb7d7a4c9f0cd173b1224f7,
     type: 2}
-  poolSize: 6
+  poolSize: 3
   objectPool: []
 --- !u!114 &114278193967848718
 MonoBehaviour:

@@ -220,7 +220,7 @@ MonoBehaviour:
     m_Bits: 256
   BottomGroundCheckerTransform: {fileID: 4300406883557956}
   TopGroundCheckerTransform: {fileID: 4926120446044840}
-  groundCheckerRadius: 0.25
+  groundCheckerRadius: 0.35
   jumpForce: 9
   fallMultiplier: 3.5
   lowJumpMultiplier: 2.5
@@ -228,8 +228,8 @@ MonoBehaviour:
   _isGroundedBottom: 0
   _isGroundedTop: 0
   _isFlipped: 0
-  micSensitivity: 5000
-  micFlipSensitivity: 9000
+  micSensitivity: 30
+  micFlipSensitivity: 100
 --- !u!212 &212710088405334182
 SpriteRenderer:
   m_ObjectHideFlags: 1

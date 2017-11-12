@@ -25,6 +25,10 @@ public class AudioVisualizer : MonoBehaviour
     {
     }
 
+    /**
+     * @todo fix flipping loop
+     * @todo improve isRedPitchUberAlles
+     */
     void Update()
     {
         // initialize our float array

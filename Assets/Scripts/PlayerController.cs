@@ -211,4 +211,56 @@ public class PlayerController : MonoBehaviour {
             _rigidbody2D.gravityScale *= -1;
         }        
     }
+
+    public bool isPlayerInRedPitch(float[] heightsDistribution)
+    {
+        float[] redPitches = { heightsDistribution[8], heightsDistribution[9], heightsDistribution[10] };
+        float[] normalPitches = {
+            heightsDistribution[0],
+            heightsDistribution[1],
+            heightsDistribution[2],
+            heightsDistribution[3],
+            heightsDistribution[4],
+            heightsDistribution[5],
+            heightsDistribution[6],
+            heightsDistribution[7],
+            heightsDistribution[11],
+            heightsDistribution[12],
+            heightsDistribution[13],
+            heightsDistribution[14],
+            heightsDistribution[15],
+            heightsDistribution[16],
+            heightsDistribution[17],
+            heightsDistribution[18],
+            heightsDistribution[19],
+            heightsDistribution[20],
+            heightsDistribution[21],
+            heightsDistribution[22],
+            heightsDistribution[23],
+            heightsDistribution[24],
+            heightsDistribution[25],
+            heightsDistribution[26],
+            heightsDistribution[27],
+            heightsDistribution[28],
+            heightsDistribution[29]
+        };
+
+        bool redPitchesUberAlles = true;
+        foreach (float currentNormalPitch in normalPitches)
+        {
+            bool isAbovePitch = false;
+            foreach (float currentRedPitch in redPitches)
+            {
+                if (currentRedPitch > currentNormalPitch * 1.5)
+                {
+                    isAbovePitch = true;
+                }
+            }
+            if (!isAbovePitch)
+            {
+                redPitchesUberAlles = false;
+            }
+        }
+        return redPitchesUberAlles;
+    }
 }

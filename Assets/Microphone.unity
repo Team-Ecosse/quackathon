@@ -216,10 +216,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioSpectrumObjects:
   - {fileID: 2089742442}
-  - {fileID: 112540497}
-  - {fileID: 1808538158}
-  - {fileID: 1794688784}
-  - {fileID: 984987160}
   heightMultiplier: 37
   numberOfSamples: 1024
   fftWindow: 0

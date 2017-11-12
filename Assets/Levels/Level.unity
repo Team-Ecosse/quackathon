@@ -250,86 +250,17 @@ Prefab:
       propertyPath: camera
       value: 
       objectReference: {fileID: 696042303}
-    - target: {fileID: 212031020459085168, guid: c488d4759ed18c04b9044ebe3b7dc956,
-        type: 2}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 298390ccceed9574d956950e728f87dd,
-        type: 3}
-    - target: {fileID: 4202863229601304, guid: c488d4759ed18c04b9044ebe3b7dc956, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 2.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4202863229601304, guid: c488d4759ed18c04b9044ebe3b7dc956, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 212031020459085168, guid: c488d4759ed18c04b9044ebe3b7dc956,
-        type: 2}
-      propertyPath: m_DrawMode
+    - target: {fileID: 1747030900241772, guid: c488d4759ed18c04b9044ebe3b7dc956, type: 2}
+      propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 212316153857102974, guid: c488d4759ed18c04b9044ebe3b7dc956,
-        type: 2}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 298390ccceed9574d956950e728f87dd,
-        type: 3}
-    - target: {fileID: 4316792542703986, guid: c488d4759ed18c04b9044ebe3b7dc956, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 2.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 212316153857102974, guid: c488d4759ed18c04b9044ebe3b7dc956,
-        type: 2}
-      propertyPath: m_Color.r
-      value: 0.6397059
-      objectReference: {fileID: 0}
-    - target: {fileID: 212316153857102974, guid: c488d4759ed18c04b9044ebe3b7dc956,
-        type: 2}
-      propertyPath: m_Color.g
-      value: 0.6397059
-      objectReference: {fileID: 0}
-    - target: {fileID: 212316153857102974, guid: c488d4759ed18c04b9044ebe3b7dc956,
-        type: 2}
-      propertyPath: m_Color.b
-      value: 0.6397059
-      objectReference: {fileID: 0}
-    - target: {fileID: 212031020459085168, guid: c488d4759ed18c04b9044ebe3b7dc956,
-        type: 2}
-      propertyPath: m_Color.r
-      value: 0.6397059
-      objectReference: {fileID: 0}
-    - target: {fileID: 212031020459085168, guid: c488d4759ed18c04b9044ebe3b7dc956,
-        type: 2}
-      propertyPath: m_Color.g
-      value: 0.6397059
-      objectReference: {fileID: 0}
-    - target: {fileID: 212031020459085168, guid: c488d4759ed18c04b9044ebe3b7dc956,
-        type: 2}
-      propertyPath: m_Color.b
-      value: 0.6397059
-      objectReference: {fileID: 0}
-    - target: {fileID: 212316153857102974, guid: c488d4759ed18c04b9044ebe3b7dc956,
-        type: 2}
-      propertyPath: m_Color.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 212031020459085168, guid: c488d4759ed18c04b9044ebe3b7dc956,
-        type: 2}
-      propertyPath: m_Color.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4202863229601304, guid: c488d4759ed18c04b9044ebe3b7dc956, type: 2}
-      propertyPath: m_LocalPosition.x
+    - target: {fileID: 1699976236954850, guid: c488d4759ed18c04b9044ebe3b7dc956, type: 2}
+      propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4202863229601304, guid: c488d4759ed18c04b9044ebe3b7dc956, type: 2}
-      propertyPath: m_LocalPosition.y
+    - target: {fileID: 1152656481696030, guid: c488d4759ed18c04b9044ebe3b7dc956, type: 2}
+      propertyPath: m_Layer
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4316792542703986, guid: c488d4759ed18c04b9044ebe3b7dc956, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c488d4759ed18c04b9044ebe3b7dc956, type: 2}
@@ -372,6 +303,21 @@ Prefab:
     - target: {fileID: 4134451687948690, guid: 691a8a6789b8ea24f81db94f1b13d226, type: 2}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114479529906708068, guid: 691a8a6789b8ea24f81db94f1b13d226,
+        type: 2}
+      propertyPath: groundCheckerRadius
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 114479529906708068, guid: 691a8a6789b8ea24f81db94f1b13d226,
+        type: 2}
+      propertyPath: micSensitivity
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 114479529906708068, guid: 691a8a6789b8ea24f81db94f1b13d226,
+        type: 2}
+      propertyPath: micFlipSensitivity
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 691a8a6789b8ea24f81db94f1b13d226, type: 2}

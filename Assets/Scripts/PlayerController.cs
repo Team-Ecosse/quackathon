@@ -84,17 +84,16 @@ public class PlayerController : MonoBehaviour {
         _isGroundedBottom = IsGroundedBottom();
         _isGroundedTop = IsGroundedTop();
         
-        //HandleJumpGravity();
 		this.moveRight ();
-        HandleJumpGravity();
 
         // levelMax equals to the highest normalized value power 2, a small number because < 1
         // pass the value to a static var so we can access it from anywhere
 
         micLoudness = LevelMax() * 10000;
 
-        if (micLoudness > micSensitivity) HandleJump();
-        if (micLoudness > micFlipSensitivity) FlipPlayer();
+        if (micLoudness > micSensitivity && !_isJumping) HandleJump();
+        if (micLoudness > micFlipSensitivity && !_isJumping) FlipPlayer();
+        HandleJumpGravity();
     }
 
 	private void moveRight () {
@@ -127,10 +126,7 @@ public class PlayerController : MonoBehaviour {
             }
 
         }
-        else
-        {
             _isJumping = false;
-        }
     }
 
     private void HandleJumpGravity()
@@ -200,12 +196,15 @@ public class PlayerController : MonoBehaviour {
 
     void FlipPlayer()
     {
-        flipEventList.Execute();
+        if (_isGroundedBottom || _isGroundedTop)
+        {   
+            flipEventList.Execute();
 
-        _isFlipped = !_isFlipped;
+            _isFlipped = !_isFlipped;
 
-        _spriterenderer.flipY = _isFlipped;
+            _spriterenderer.flipY = _isFlipped;
 
-        _rigidbody2D.gravityScale *= -1;
+            _rigidbody2D.gravityScale *= -1;
+        }        
     }
 }

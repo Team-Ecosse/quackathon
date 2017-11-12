@@ -28,6 +28,9 @@ public class GameManager : MonoBehaviour {
         
         currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         nextSceneIndex = (SceneManager.GetActiveScene().buildIndex + 1);
+
+        PlayerManager.setHealth(3);
+        ScoreManager.setScore(0);
     }
 
     /*
@@ -47,9 +50,9 @@ public class GameManager : MonoBehaviour {
         SceneManager.LoadSceneAsync(nextSceneIndex);
     }
 
-    public void ResetScene() {
-
-        SceneManager.LoadSceneAsync(currentSceneIndex);
+    public static void ResetScene() {
+        
+        SceneManager.LoadSceneAsync(1);
     }
 
     public void ExitGame() {

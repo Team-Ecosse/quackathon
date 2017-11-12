@@ -93,7 +93,7 @@ public class PlayerController : MonoBehaviour {
 
         micLoudness = _micInit.GetAveragedVolume() * 1000;
 
-        Debug.Log(micLoudness);
+        //Debug.Log(micLoudness);
 
         if (micLoudness > micSensitivity && !_isJumping) HandleJump();
         if (micLoudness > micFlipSensitivity && !_isJumping) FlipPlayer();

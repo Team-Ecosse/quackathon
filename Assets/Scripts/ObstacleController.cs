@@ -20,7 +20,7 @@ public class ObstacleController : MonoBehaviour {
 
         if (collision.tag == "Player"){
 
-            Debug.Log("Player hit!");
+            //Debug.Log("Player hit!");
 
             GameManager.PlayerTakeDamage(damage);
 

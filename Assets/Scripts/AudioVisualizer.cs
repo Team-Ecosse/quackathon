@@ -11,6 +11,10 @@ public class AudioVisualizer : MonoBehaviour
     public FFTWindow fftWindow;
     public float lerpTime = 1;
 
+    public PlayerController player;
+
+    private bool _flipping = false;
+
     /*
     * The intensity of the frequencies found between 0 and 44100 will be
     * grouped into 1024 elements. So each element will contain a range of about 43.06 Hz.
@@ -79,10 +83,15 @@ public class AudioVisualizer : MonoBehaviour
         };
         if (GetAverage(rest) / GetAverage(eightToTen) > 40)
         {
-            Debug.Log("What a voice!");
+            if (!_flipping)
+            {
+
+                player.FlipPlayer();
+                _flipping = true;
+            }
         } else
         {
-            Debug.Log(":/");
+            _flipping = false;
         }
     }
 

@@ -198,7 +198,7 @@ public class PlayerController : MonoBehaviour {
         Microphone.End(_device);
     }
 
-    void FlipPlayer()
+    public void FlipPlayer()
     {
         if (_isGroundedBottom || _isGroundedTop)
         {   

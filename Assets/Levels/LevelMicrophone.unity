@@ -2091,6 +2091,12 @@ GameObject:
   m_PrefabParentObject: {fileID: 1231825068182798, guid: 691a8a6789b8ea24f81db94f1b13d226,
     type: 2}
   m_PrefabInternal: {fileID: 381127393}
+--- !u!114 &1398535213 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114479529906708068, guid: 691a8a6789b8ea24f81db94f1b13d226,
+    type: 2}
+  m_PrefabInternal: {fileID: 381127393}
+  m_Script: {fileID: 11500000, guid: 331997648261ed74f945dd5a4fc9ca8b, type: 3}
 --- !u!114 &1398535217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2233,6 +2239,7 @@ MonoBehaviour:
   numberOfSamples: 1024
   fftWindow: 5
   lerpTime: 1
+  player: {fileID: 1398535213}
 --- !u!1 &1414460271
 GameObject:
   m_ObjectHideFlags: 0

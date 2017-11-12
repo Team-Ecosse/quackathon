@@ -53,6 +53,8 @@ public class PlayerController : MonoBehaviour {
     public int micFlipSensitivity;
     public static float micLoudness;
 
+    public EventList flipEventList = new EventList();
+
     void Awake()
     {
         _playerController = this;
@@ -198,6 +200,8 @@ public class PlayerController : MonoBehaviour {
 
     void FlipPlayer()
     {
+        flipEventList.execute();
+
         _isFlipped = !_isFlipped;
 
         _spriterenderer.flipY = _isFlipped;

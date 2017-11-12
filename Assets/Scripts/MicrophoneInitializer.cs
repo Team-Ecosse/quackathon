@@ -19,8 +19,6 @@ public class MicrophoneInitializer : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("MicrophoneInput#Start");
-
         //get components you'll need
         audioSource = GetComponent<AudioSource>();
 
@@ -39,7 +37,6 @@ public class MicrophoneInitializer : MonoBehaviour
 
     void UpdateMicrophone()
     {
-        Debug.Log("MicrophoneInput#UpdateMicrophone");
         audioSource.Stop(); 
         //Start recording to audioclip from the mic
         audioSource.clip = Microphone.Start(microphone, true, 10, audioSampleRate);
@@ -66,19 +63,16 @@ public class MicrophoneInitializer : MonoBehaviour
 
 
     public void micDropdownValueChangedHandler(Dropdown mic){
-        Debug.Log("MicrophoneInput#micDropdownValueChangedHandler");
         microphone = options[mic.value];
         UpdateMicrophone ();
     }
 
     public void thresholdValueChangedHandler(Slider thresholdSlider){
-        Debug.Log("MicrophoneInput#GetFundamentalFrequency");
         minThreshold = thresholdSlider.value;
     }
 	
     public float GetAveragedVolume()
     { 
-        Debug.Log("MicrophoneInput#GetFundamentalFrequency");
         float[] data = new float[256];
         float a = 0;
         audioSource.GetOutputData(data,0);
@@ -91,7 +85,6 @@ public class MicrophoneInitializer : MonoBehaviour
 	
     public float GetFundamentalFrequency()
     {
-        Debug.Log("MicrophoneInput#GetFundamentalFrequency");
         float fundamentalFrequency = 0.0f;
         float[] data = new float[samples];
         audioSource.GetSpectrumData(data,0,fftWindow);

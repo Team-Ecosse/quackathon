@@ -6,6 +6,7 @@ using UnityEngine.Rendering;
 public class PlayerController : MonoBehaviour {
 
     public MicrophoneInitializer _micInit;
+    public float jumpMultiplier = 1000;
 
     [Header("Required GameObject Refs.")]
     [Space]
@@ -51,7 +52,7 @@ public class PlayerController : MonoBehaviour {
     private const int _sampleWindow = 128;
     private string _device;
 
-    public int micSensitivity;
+    public int micSensitivity = 10;
     public int micFlipSensitivity;
     public static float micLoudness;
 
@@ -91,12 +92,11 @@ public class PlayerController : MonoBehaviour {
         // levelMax equals to the highest normalized value power 2, a small number because < 1
         // pass the value to a static var so we can access it from anywhere
 
-        micLoudness = _micInit.GetAveragedVolume() * 1000;
+        micLoudness = _micInit.GetAveragedVolume() * jumpMultiplier;
 
-        //Debug.Log(micLoudness);
+        Debug.Log(micLoudness);
 
         if (micLoudness > micSensitivity && !_isJumping) HandleJump();
-        if (micLoudness > micFlipSensitivity && !_isJumping) FlipPlayer();
         HandleJumpGravity();
     }
 

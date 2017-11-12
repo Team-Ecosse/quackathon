@@ -32,6 +32,7 @@ public class PauseMenu : MonoBehaviour {
 
 	public void MainMenu() {
 		_gameManager.ReturnToMainMenu ();
+		Time.timeScale = 1;
 	}
 
 	public void ReturnToGame() {
@@ -43,5 +44,6 @@ public class PauseMenu : MonoBehaviour {
 
 	public void RestartGame() {
 		SceneManager.LoadScene ("Level");
+		Time.timeScale = 1;
 	}
 }

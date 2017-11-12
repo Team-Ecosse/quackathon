@@ -3,7 +3,7 @@ using UnityEngine.UI; //for accessing Sliders and Dropdown
 using System.Collections.Generic; // So we can use List<>
 
 [RequireComponent(typeof(AudioSource))]
-public class MicrophoneInput : MonoBehaviour
+public class MicrophoneInitializer : MonoBehaviour
 {
     public float minThreshold = 0;
     public float frequency = 0.0f;

@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour {
         nextSceneIndex = (SceneManager.GetActiveScene().buildIndex + 1);
 
         PlayerManager.setHealth(3);
+        ScoreManager.setScore(0);
     }
 
     /*

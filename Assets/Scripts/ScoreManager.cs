@@ -12,8 +12,11 @@ public class ScoreManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+    }
 
-        playerScore = 0;
+    public void setScore(int sco)
+    {
+        playerScore = sco;
 
     }
 

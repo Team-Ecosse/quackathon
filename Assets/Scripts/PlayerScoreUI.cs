@@ -20,6 +20,6 @@ public class PlayerScoreUI : MonoBehaviour
     void Update()
     {
         text = this.GetComponent<Text>();
-        text.text = GameManager.ReturnPlayerSco().ToString();
+        text.text = "Score: " + GameManager.ReturnPlayerSco().ToString();
     }
 }

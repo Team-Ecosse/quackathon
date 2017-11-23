@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections.Generic; // So we can use List<>
 
+/**
+ * Heavily based on https://github.com/patrickhimes/microphone-demo
+ */
 [RequireComponent(typeof(AudioSource))]
 public class MicrophoneInitializer : MonoBehaviour
 {

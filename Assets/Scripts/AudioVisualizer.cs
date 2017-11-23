@@ -3,6 +3,9 @@ using UnityEngine.UI;
 using System.Collections;
 using System;
 
+/**
+ * Heavily based on https://github.com/patrickhimes/microphone-demo
+ */
 public class AudioVisualizer : MonoBehaviour
 {
     public Transform[] audioSpectrumObjects;
@@ -21,7 +24,7 @@ public class AudioVisualizer : MonoBehaviour
     * The average human voice spans from about 60 hz to 9k Hz
     * we need a way to assign a range to each object that gets animated. that would be the best way to control and modify animatoins.
     */
-    void Start()
+void Start()
     {
     }
 
@@ -81,7 +84,7 @@ public class AudioVisualizer : MonoBehaviour
             heightsDistribution[28],
             heightsDistribution[29]
         };
-        if (GetAverage(rest) / GetAverage(eightToTen) > 40)
+        if (GetAverage(rest) / GetAverage(eightToTen) > 25)
         {
             if (!_flipping)
             {

@@ -20,6 +20,6 @@ public class PlayerHealthUI : MonoBehaviour
     void Update()
     {
         text = this.GetComponent<Text>();
-        text.text = GameManager.ReturnPlayerHP().ToString();
+        text.text = "HP: "+GameManager.ReturnPlayerHP().ToString();
     }
 }
